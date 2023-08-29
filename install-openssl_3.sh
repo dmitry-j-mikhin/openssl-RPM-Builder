@@ -35,7 +35,7 @@ Source: https://www.openssl.org/source/%{name}-%{version}.tar.gz
 
 BuildRequires: make gcc perl perl-WWW-Curl
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-%global openssldir /usr/openssl
+%global openssldir /usr
 
 %description
 https://github.com/philyuchkoff/openssl-RPM-Builder
@@ -62,9 +62,6 @@ make
 
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_libdir}
-ln -sf %{openssldir}/lib64/libssl.so.3 %{buildroot}%{_libdir}
-ln -sf %{openssldir}/lib64/libcrypto.so.3 %{buildroot}%{_libdir}
-ln -sf %{openssldir}/bin/openssl %{buildroot}%{_bindir}
 
 %clean
 [ "%{buildroot}" != "/" ] && %{__rm} -rf %{buildroot}
@@ -72,9 +69,6 @@ ln -sf %{openssldir}/bin/openssl %{buildroot}%{_bindir}
 %files
 %{openssldir}
 %defattr(-,root,root)
-/usr/bin/openssl
-/usr/lib64/libcrypto.so.3
-/usr/lib64/libssl.so.3
 
 %files devel
 %{openssldir}/include/*
